@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+import { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } from 'astro:env/server';
 
 // This route runs on the server at request time; the rest of the site is static.
 export const prerender = false;
@@ -12,9 +13,6 @@ const json = (body: Record<string, unknown>, status = 200) =>
 
 const escapeHtml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-
-const env = (key: string): string | undefined =>
-  process.env[key] ?? (import.meta.env[key] as string | undefined);
 
 export const POST: APIRoute = async ({ request }) => {
   let data: Record<string, unknown>;
@@ -49,9 +47,9 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ success: false, error: 'פרטי הפרויקט ארוכים מדי.' }, 400);
   }
 
-  const apiKey = env('RESEND_API_KEY');
-  const to = env('CONTACT_TO_EMAIL');
-  const from = env('CONTACT_FROM_EMAIL') ?? 'DeveLogic <onboarding@resend.dev>';
+  const apiKey = RESEND_API_KEY;
+  const to = CONTACT_TO_EMAIL;
+  const from = CONTACT_FROM_EMAIL;
 
   if (!apiKey || !to) {
     console.error('Missing RESEND_API_KEY or CONTACT_TO_EMAIL');

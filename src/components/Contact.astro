@@ -36,8 +36,9 @@ import Icon from './Icon.astro';
         <!-- Honeypot: hidden from people, filled in by bots -->
         <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <p class="form-error" role="alert" hidden></p>
+        <p class="form-note">בשליחת הטופס אתם מאשרים את <a href="/privacy">מדיניות הפרטיות</a>.</p>
         <button class="button button-submit" type="submit">
-          <span class="submit-label">תיאום שיחת ייעוץ</span>
+          <span class="submit-label">תיאום שיחת ייעוץ חינם</span>
           <Icon name="arrow" size={19} />
         </button>
       </form>

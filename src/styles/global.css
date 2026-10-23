@@ -15,12 +15,18 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
+html, body { max-width: 100%; overflow-x: hidden; }
 body { margin: 0; min-width: 320px; background: var(--paper); font-size: 18px; }
+img, video, canvas { max-width: 100%; height: auto; }
+svg { max-width: 100%; }
+h1, h2, h3, p { overflow-wrap: break-word; }
 a { color: inherit; text-decoration: none; }
 button, input, textarea { font: inherit; }
 button { cursor: pointer; }
 
 .page-shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+/* Let grid/flex children shrink below their content width instead of overflowing */
+.hero-grid > *, .about-grid > *, .contact-grid > *, .section-heading > *, .engineering-heading > *, .service-grid > *, .principles-grid > *, .form-row > *, .flow-step > * { min-width: 0; }
 
 /* Hero */
 .hero {
@@ -40,7 +46,13 @@ button { cursor: pointer; }
   content: "";
   mask-image: linear-gradient(to right, transparent 0, black 55%, black 100%);
 }
-.nav { position: relative; z-index: 3; height: 88px; display: flex; align-items: center; justify-content: flex-end; border-bottom: 1px solid rgba(255,255,255,.1); }
+.nav { position: relative; z-index: 3; height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.nav-links { display: flex; align-items: center; gap: 34px; margin: 0; padding: 0; list-style: none; font-size: 16px; font-weight: 600; }
+.nav-links a { color: #c3d3ce; transition: color .2s ease; }
+.nav-links a:hover { color: var(--mint); }
+.nav-links .nav-cta { padding: 9px 18px; color: var(--mint); border: 1px solid rgba(185,255,102,.45); border-radius: 5px; }
+.nav-links .nav-cta:hover { color: var(--ink); background: var(--mint); }
+section[id] { scroll-margin-top: 16px; }
 .brand-lockup { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 5px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 800; letter-spacing: -.6px; }
 .brand-tagline { width: 100%; padding-top: 4px; color: #d9ffad; border-top: 2px solid var(--mint); font-family: "DM Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 2.2px; line-height: 1; text-align: left; }
@@ -147,7 +159,7 @@ h2 { margin-bottom: 0; color: var(--ink); font-size: clamp(43px, 4.5vw, 61px); l
 .kicker-light { color: #77cfae; }
 .contact-copy h2 { margin-bottom: 25px; color: #fff; font-size: 55px; }
 .contact-copy > p:not(.kicker) { color: #92a7a0; line-height: 1.8; }
-.contact-form { min-height: 590px; padding: 42px; color: var(--ink); background: #fff; }
+.contact-form { position: relative; min-height: 590px; padding: 42px; color: var(--ink); background: #fff; }
 .form-heading { margin-bottom: 30px; }
 .form-heading h3 { margin-bottom: 6px; font-size: 27px; letter-spacing: -.8px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -159,7 +171,8 @@ input { height: 48px; }
 textarea { resize: vertical; line-height: 1.5; }
 input::placeholder, textarea::placeholder { color: #a5afac; }
 input:focus, textarea:focus { border-color: #45a880; box-shadow: 0 0 0 3px rgba(69,168,128,.1); }
-.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+/* Visually hidden without an offset: in RTL, a far-left offset becomes scrollable overflow */
+.hp-field { position: absolute; width: 1px; height: 1px; margin: 0; padding: 0; overflow: hidden; clip-path: inset(50%); border: 0; opacity: 0; }
 .form-error { margin: 0 0 14px; padding: 11px 14px; color: #a12a2a; border: 1px solid #f1c9c9; border-radius: 2px; background: #fdf3f3; font-size: 14px; }
 .button-submit { width: 100%; color: var(--ink); background: var(--mint); }
 .button-submit:hover { background: #c8ff84; }
@@ -173,6 +186,23 @@ input:focus, textarea:focus { border-color: #45a880; box-shadow: 0 0 0 3px rgba(
 footer { color: #758a83; border-top: 1px solid rgba(255,255,255,.08); background: var(--navy); }
 .footer-inner { min-height: 105px; display: flex; align-items: center; justify-content: space-between; font-size: 15px; }
 .brand-dark { color: #fff; }
+.footer-meta { display: flex; align-items: center; gap: 24px; }
+.footer-meta a { transition: color .2s ease; }
+.footer-meta a:hover { color: var(--mint); }
+.form-note { margin: 0 0 14px; color: #73827d; font-size: 14px; }
+.form-note a { color: #18795a; text-decoration: underline; }
+
+/* Privacy policy */
+.legal-header { background: var(--navy); }
+.legal-nav { height: 88px; display: flex; align-items: center; justify-content: space-between; }
+.legal { padding: 80px 0 100px; color: var(--ink); }
+.legal-body { max-width: 760px; }
+.legal h1 { color: var(--ink); font-size: clamp(40px, 4.5vw, 56px); letter-spacing: -2px; }
+.legal h2 { margin: 44px 0 14px; font-size: 28px; letter-spacing: -.8px; }
+.legal p, .legal li { color: var(--ink-soft); line-height: 1.8; }
+.legal ul { margin: 0 0 16px; padding-inline-start: 22px; }
+.legal a:not(.brand) { color: #18795a; text-decoration: underline; }
+.legal-updated { font-size: 15px; }
 
 @media (max-width: 900px) {
   .hero { min-height: auto; }
@@ -190,7 +220,9 @@ footer { color: #758a83; border-top: 1px solid rgba(255,255,255,.08); background
 
 @media (max-width: 640px) {
   .page-shell { width: min(100% - 32px, 1180px); }
-  .nav { height: 74px; }
+  .nav { height: auto; flex-direction: column-reverse; align-items: stretch; gap: 14px; padding-block: 18px 14px; }
+  .nav-links { gap: 20px; overflow-x: auto; font-size: 15px; white-space: nowrap; scrollbar-width: none; }
+  .nav-links .nav-cta { padding: 6px 12px; }
   h1 { font-size: 49px; letter-spacing: -3px; }
   .hero-grid { padding-block: 62px 60px; }
   .hero-lede { font-size: 18px; }
@@ -215,6 +247,8 @@ footer { color: #758a83; border-top: 1px solid rgba(255,255,255,.08); background
   .contact-form { min-height: 0; padding: 28px 22px; }
   .form-row { grid-template-columns: 1fr; gap: 0; }
   .footer-inner { padding-block: 28px; flex-direction: column; gap: 16px; }
+  .footer-meta { flex-direction: column; gap: 10px; }
+  .legal { padding: 56px 0 72px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
