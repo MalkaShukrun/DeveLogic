@@ -1,0 +1,65 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+
+const principles: { icon: IconName; title: string; copy: string }[] = [
+  {
+    icon: 'layers',
+    title: 'ארכיטקטורה ויציבות לטווח ארוך',
+    copy: 'יצירת תשתית חזקה ומתוכננת היטב, שמבטיחה פעולה חלקה והתמודדות קלה עם גידול בפעילות ובנפח הנתונים.',
+  },
+  {
+    icon: 'shield',
+    title: 'אבטחה והגנה מקיפה',
+    copy: 'הטמעת מנגנוני אבטחה קפדניים, הצפנה מתקדמת וניהול הרשאות מבוקר להגנה על פרטיות הנתונים והמידע הרגיש.',
+  },
+  {
+    icon: 'database',
+    title: 'מבנה נתונים אופטימלי',
+    copy: 'תכנון מדויק של בסיס הנתונים המאפשר שליפה מהירה, חיסכון במשאבים ושמירה על מידע מסודר ומאורגן.',
+  },
+  {
+    icon: 'expand',
+    title: 'גמישות ויכולת התאמה מלאה',
+    copy: 'קוד נקי ומודולרי שמאפשר להוסיף פיצ׳רים, לבצע שינויים ולהרחיב את המערכת בהתאם לצרכים העסקיים המתפתחים.',
+  },
+  {
+    icon: 'monitor',
+    title: 'חוויית משתמש ונגישות',
+    copy: 'התאמה מלאה לכל סוגי המסכים, בדגש על מובייל, עם עיצוב נוח ונגיש וזמני טעינה מהירים במיוחד.',
+  },
+  {
+    icon: 'refresh',
+    title: 'תחזוקה ואמינות גבוהה',
+    copy: 'טיפול מבוקר בשגיאות, מנגנוני גיבוי אוטומטיים ואחריות מקצה לקצה שמעניקים שקט נפשי וביטחון במערכת.',
+  },
+];
+---
+
+<section class="engineering">
+  <div class="page-shell">
+    <div class="engineering-heading">
+      <div>
+        <p class="kicker">הסטנדרט ההנדסי שלנו</p>
+        <h2>מערכות שנבנות נכון,<br />מהיסוד</h2>
+      </div>
+      <p>
+        כל פתרון שנבנה ב-DeveLogic נשען על עקרונות שמבטיחים ביצועים גבוהים, אמינות וגמישות לטווח ארוך.
+      </p>
+    </div>
+    <div class="principles-grid">
+      {
+        principles.map((principle) => (
+          <article class="principle">
+            <div class="principle-icon">
+              <Icon name={principle.icon} size={22} />
+            </div>
+            <div class="principle-copy">
+              <h3>{principle.title}</h3>
+              <p>{principle.copy}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

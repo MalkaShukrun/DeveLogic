@@ -1,5 +1,5 @@
 {
-  "name": "applitech-site",
+  "name": "develogic-site",
   "type": "module",
   "version": "1.0.0",
   "private": true,
@@ -10,16 +10,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "start": "node ./dist/server/entry.mjs"
+    "start": "node ./dist/server/entry.mjs",
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/node": "^9.0.0",
-    "@tailwindcss/vite": "^4.0.0",
     "astro": "^5.0.0",
-    "resend": "^4.0.0",
-    "tailwindcss": "^4.0.0"
+    "resend": "^4.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.19.43"
+    "@types/node": "^20.19.0"
   }
 }

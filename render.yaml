@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: applitech
+    name: develogic
     runtime: node
     plan: free
     buildCommand: npm install && npm run build
@@ -16,4 +16,4 @@ services:
       - key: CONTACT_TO_EMAIL
         sync: false
       - key: CONTACT_FROM_EMAIL
-        value: AppliTech <onboarding@resend.dev>
+        value: DeveLogic <onboarding@resend.dev>

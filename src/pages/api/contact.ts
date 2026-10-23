@@ -38,23 +38,28 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ success: false, error: 'נא להזין שם מלא.' }, 400);
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 150) {
-    return json({ success: false, error: 'כתובת הדוא"ל אינה תקינה.' }, 400);
+    return json({ success: false, error: 'כתובת האימייל אינה תקינה.' }, 400);
   }
-  if (!/^[0-9+\-()\s]{7,20}$/.test(phone)) {
+  // Phone is optional; validate only when provided.
+  if (phone && !/^[0-9+\-()\s]{7,20}$/.test(phone)) {
     return json({ success: false, error: 'מספר הטלפון אינו תקין.' }, 400);
   }
-  if (message.length < 5 || message.length > 3000) {
-    return json({ success: false, error: 'נא לתאר את הפרויקט (לפחות כמה מילים).' }, 400);
+  // Project details are optional.
+  if (message.length > 3000) {
+    return json({ success: false, error: 'פרטי הפרויקט ארוכים מדי.' }, 400);
   }
 
   const apiKey = env('RESEND_API_KEY');
   const to = env('CONTACT_TO_EMAIL');
-  const from = env('CONTACT_FROM_EMAIL') ?? 'AppliTech <onboarding@resend.dev>';
+  const from = env('CONTACT_FROM_EMAIL') ?? 'DeveLogic <onboarding@resend.dev>';
 
   if (!apiKey || !to) {
     console.error('Missing RESEND_API_KEY or CONTACT_TO_EMAIL');
     return json({ success: false, error: 'שירות המייל אינו מוגדר כרגע.' }, 500);
   }
+
+  const phoneDisplay = phone || 'לא צוין';
+  const messageDisplay = message || 'לא צוין';
 
   try {
     const resend = new Resend(apiKey);
@@ -65,14 +70,14 @@ export const POST: APIRoute = async ({ request }) => {
       subject: `פנייה חדשה מהאתר - ${name}`,
       html: `
         <div dir="rtl" style="font-family:Arial,sans-serif;line-height:1.6">
-          <h2>פנייה חדשה מאתר AppliTech</h2>
+          <h2>פנייה חדשה מאתר DeveLogic</h2>
           <p><strong>שם:</strong> ${escapeHtml(name)}</p>
-          <p><strong>דוא"ל:</strong> ${escapeHtml(email)}</p>
-          <p><strong>טלפון:</strong> ${escapeHtml(phone)}</p>
-          <p><strong>תיאור הפרויקט:</strong></p>
-          <p style="white-space:pre-wrap">${escapeHtml(message)}</p>
+          <p><strong>אימייל:</strong> ${escapeHtml(email)}</p>
+          <p><strong>טלפון:</strong> ${escapeHtml(phoneDisplay)}</p>
+          <p><strong>פרטי הפרויקט:</strong></p>
+          <p style="white-space:pre-wrap">${escapeHtml(messageDisplay)}</p>
         </div>`,
-      text: `שם: ${name}\nדוא"ל: ${email}\nטלפון: ${phone}\n\n${message}`,
+      text: `שם: ${name}\nאימייל: ${email}\nטלפון: ${phoneDisplay}\n\n${messageDisplay}`,
     });
 
     if (error) {

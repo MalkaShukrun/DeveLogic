@@ -1,87 +1,81 @@
 ---
-const field =
-  'mt-2 w-full rounded-xl border border-white/10 bg-ink px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-500/30';
+import Icon from './Icon.astro';
 ---
 
-<section id="contact" class="py-20 sm:py-28">
-  <div class="mx-auto max-w-2xl px-5">
-    <div class="text-center">
-      <h2 class="text-3xl font-bold text-white sm:text-4xl">יצירת קשר</h2>
-      <p class="mt-4 text-gray-400">ספרו לנו על הפרויקט ונחזור אליכם בהקדם.</p>
+<section class="contact" id="contact">
+  <div class="page-shell contact-grid">
+    <div class="contact-copy">
+      <p class="kicker kicker-light">יצירת קשר</p>
+      <h2>יש לכם אתגר? בואו נפתור אותו.</h2>
+      <p>ספרו לנו בקצרה על המטרות שלכם. נחזור אליכם כדי לבחון את הדרך הטכנולוגית הנכונה.</p>
     </div>
 
-    <form id="contact-form" class="mt-10 space-y-5 rounded-2xl border border-white/10 bg-ink-soft p-6 sm:p-8" novalidate>
-      <div>
-        <label for="name" class="text-sm font-medium text-gray-200">שם מלא</label>
-        <input id="name" name="name" type="text" required maxlength="100" autocomplete="name" class={field} />
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label for="email" class="text-sm font-medium text-gray-200">דוא"ל</label>
-          <input id="email" name="email" type="email" required maxlength="150" autocomplete="email" dir="ltr" class={field + ' text-right'} />
+    <div class="contact-form">
+      <form id="contact-form" novalidate>
+        <div class="form-heading">
+          <h3>טופס פנייה</h3>
         </div>
-        <div>
-          <label for="phone" class="text-sm font-medium text-gray-200">טלפון</label>
-          <input id="phone" name="phone" type="tel" required maxlength="30" autocomplete="tel" dir="ltr" class={field + ' text-right'} />
+        <div class="form-row">
+          <label>
+            שם מלא
+            <input type="text" name="name" autocomplete="name" required minlength="2" maxlength="100" />
+          </label>
+          <label>
+            אימייל
+            <input type="email" name="email" autocomplete="email" required maxlength="150" />
+          </label>
         </div>
-      </div>
-      <div>
-        <label for="message" class="text-sm font-medium text-gray-200">תיאור הפרויקט</label>
-        <textarea id="message" name="message" rows="5" required maxlength="3000" class={field}></textarea>
-      </div>
+        <label>
+          מספר טלפון
+          <input type="tel" name="phone" autocomplete="tel" maxlength="20" />
+        </label>
+        <label>
+          פרטי הפרויקט <span>(רשות)</span>
+          <textarea name="message" rows="5" maxlength="3000"></textarea>
+        </label>
+        <!-- Honeypot: hidden from people, filled in by bots -->
+        <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <p class="form-error" role="alert" hidden></p>
+        <button class="button button-submit" type="submit">
+          <span class="submit-label">תיאום שיחת ייעוץ</span>
+          <Icon name="arrow" size={19} />
+        </button>
+      </form>
 
-      <!-- Honeypot: hidden from real users, bots tend to fill it -->
-      <div class="absolute -left-[9999px]" aria-hidden="true">
-        <label>אל תמלאו שדה זה<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      <div class="success-message" role="status" hidden>
+        <span><Icon name="check" size={28} /></span>
+        <h3>תודה שפניתם אלינו.</h3>
+        <p>פרטי הפרויקט התקבלו. נהיה איתכם בקשר בקרוב.</p>
+        <button type="button" class="text-link" data-reset>שליחת הודעה נוספת</button>
       </div>
-
-      <button
-        id="submit-btn"
-        type="submit"
-        class="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 font-bold text-white transition hover:bg-brand-500 disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        <svg id="spinner" class="hidden h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
-          <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
-        </svg>
-        <span id="btn-label">שליחה</span>
-      </button>
-
-      <p id="form-status" role="status" aria-live="polite" class="hidden rounded-xl px-4 py-3 text-sm"></p>
-    </form>
+    </div>
   </div>
 </section>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  const btn = document.getElementById('submit-btn') as HTMLButtonElement | null;
-  const label = document.getElementById('btn-label');
-  const spinner = document.getElementById('spinner');
-  const status = document.getElementById('form-status');
+  const form = document.querySelector<HTMLFormElement>('#contact-form')!;
+  const success = document.querySelector<HTMLElement>('.success-message')!;
+  const errorBox = form.querySelector<HTMLElement>('.form-error')!;
+  const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const submitLabel = submit.querySelector<HTMLElement>('.submit-label')!;
+  const defaultLabel = submitLabel.textContent;
 
-  function show(kind: 'success' | 'error', text: string) {
-    if (!status) return;
-    status.textContent = text;
-    status.className =
-      'rounded-xl px-4 py-3 text-sm ' +
-      (kind === 'success'
-        ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
-        : 'bg-red-500/15 text-red-300 border border-red-500/30');
+  function showError(message: string) {
+    errorBox.textContent = message;
+    errorBox.hidden = false;
   }
 
-  function setLoading(loading: boolean) {
-    if (!btn || !label || !spinner) return;
-    btn.disabled = loading;
-    spinner.classList.toggle('hidden', !loading);
-    label.textContent = loading ? 'שולח...' : 'שליחה';
-  }
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    errorBox.hidden = true;
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!form.reportValidity()) return;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
-    setLoading(true);
-    status?.classList.add('hidden');
+    submit.disabled = true;
+    submitLabel.textContent = 'שולחים...';
 
     try {
       const res = await fetch('/api/contact', {
@@ -91,16 +85,24 @@ const field =
       });
       const data = await res.json().catch(() => ({}));
 
-      if (res.ok && data.success) {
-        show('success', 'תודה! ההודעה נשלחה בהצלחה, ניצור איתך קשר בהקדם.');
-        form.reset();
-      } else {
-        show('error', data.error || 'אירעה שגיאה בשליחת ההודעה. נסו שוב מאוחר יותר.');
+      if (!res.ok || !data.success) {
+        showError(data.error ?? 'שליחת ההודעה נכשלה. נסו שוב מאוחר יותר.');
+        return;
       }
+
+      form.reset();
+      form.hidden = true;
+      success.hidden = false;
     } catch {
-      show('error', 'לא ניתן להתחבר לשרת. בדקו את החיבור ונסו שוב.');
+      showError('אין חיבור לשרת. בדקו את החיבור ונסו שוב.');
     } finally {
-      setLoading(false);
+      submit.disabled = false;
+      submitLabel.textContent = defaultLabel;
     }
+  });
+
+  success.querySelector('[data-reset]')!.addEventListener('click', () => {
+    success.hidden = true;
+    form.hidden = false;
   });
 </script>

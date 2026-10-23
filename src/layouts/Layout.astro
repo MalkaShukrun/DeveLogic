@@ -7,30 +7,31 @@ interface Props {
 }
 
 const {
-  title = 'AppliTech - פתרונות תוכנה ו-AI',
-  description = 'AppliTech - פיתוח מערכות מקצה לקצה, יצירת סוכני AI ואימון מודלים מתקדמים.',
+  title = 'DeveLogic | פיתוח תוכנה ופתרונות AI בהתאמה אישית',
+  description = 'DeveLogic הופכת אתגרים עסקיים לתוכנה מותאמת אישית ולפתרונות AI מעשיים, עם יותר מ־11 שנות ניסיון הנדסי.',
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="he" dir="rtl">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:locale" content="he_IL" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#071a17" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Heebo:wght@400;500;600;700;800&display=swap"
     />
-    <title>{title}</title>
   </head>
-  <body class="antialiased">
+  <body>
     <slot />
   </body>
 </html>
