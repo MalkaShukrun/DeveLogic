@@ -137,13 +137,8 @@ input:focus, textarea:focus { border-color: #45a880; box-shadow: 0 0 0 3px rgba(
 /* Footer */
 footer { color: #758a83; border-top: 1px solid rgba(255,255,255,.08); background: var(--navy); }
 .brand-dark { color: #fff; }
-.footer-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 64px; padding-block: 36px 28px; }
+.footer-top { padding-block: 36px 28px; }
 .footer-brand p { max-width: 400px; margin: 24px 0 0; color: #9fb2ac; font-size: 15px; line-height: 1.8; }
-.footer-nav { min-width: 160px; text-align: end; }
-.footer-heading { margin: 0 0 20px; color: var(--mint); font-size: 14px; font-weight: 700; line-height: 1.2; letter-spacing: 0; }
-.footer-nav ul { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; font-size: 16px; font-weight: 600; line-height: 1.4; }
-.footer-nav a { color: #c3d3ce; transition: color .2s ease; }
-.footer-nav a:hover { color: var(--mint); }
 .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 24px; border-top: 1px solid rgba(255,255,255,.08); font-size: 14px; }
 .footer-bottom a { transition: color .2s ease; }
 .footer-bottom a:hover { color: var(--mint); }
@@ -186,8 +181,7 @@ footer { color: #758a83; border-top: 1px solid rgba(255,255,255,.08); background
   .contact-copy h2 { font-size: 45px; }
   .contact-form { min-height: 0; padding: 28px 22px; }
   .form-row { grid-template-columns: 1fr; gap: 0; }
-  .footer-top { grid-template-columns: 1fr; gap: 40px; padding-block: 32px 24px; }
-  .footer-nav { text-align: start; }
+  .footer-top { padding-block: 32px 24px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
   .legal { padding: 56px 0 72px; }
 }

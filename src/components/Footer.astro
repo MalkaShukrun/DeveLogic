@@ -2,11 +2,6 @@
 import Brand from './Brand.astro';
 
 const year = new Date().getFullYear();
-
-// Same sections as the header nav. Root-relative so they also work from /privacy.
-const links = [
-  { href: '/#contact', label: 'צור קשר' },
-];
 ---
 
 <footer>
@@ -21,19 +16,6 @@ const links = [
         הנדסי.
       </p>
     </div>
-
-    <nav class="footer-nav" aria-labelledby="footer-nav-heading">
-      <h2 class="footer-heading" id="footer-nav-heading">ניווט</h2>
-      <ul>
-        {
-          links.map((link) => (
-            <li>
-              <a href={link.href}>{link.label}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
   </div>
 
   <div class="page-shell footer-bottom">
