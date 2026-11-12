@@ -10,6 +10,9 @@ const {
   title = 'DeveLogic | פיתוח תוכנה ופתרונות AI בהתאמה אישית',
   description = 'DeveLogic בונה תוכנה ופתרונות AI בהתאמה אישית שחוסכים לעסקים זמן ועוזרים להם לצמוח, עם יותר מ־11 שנות ניסיון הנדסי.',
 } = Astro.props;
+
+// Canonical URL on the non-www domain, without query string or trailing slash.
+const canonicalURL = new URL(Astro.url.pathname.replace(/(.)\/$/, '$1'), Astro.site).href;
 ---
 
 <!doctype html>
@@ -19,11 +22,14 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta name="theme-color" content="#071a17" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

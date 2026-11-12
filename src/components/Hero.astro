@@ -1,14 +1,32 @@
 ---
 import Brand from './Brand.astro';
-import Icon from './Icon.astro';
+import Icon, { type IconName } from './Icon.astro';
+
+const steps: { icon: IconName; number: string; title: string; copy: string }[] = [
+  {
+    icon: 'strategy',
+    number: '01',
+    title: 'אפיון ואסטרטגיה',
+    copy: 'מתחילים מהבעיה העסקית שלכם: מה מעכב, מה חשוב לכם ואיך תיראה הצלחה. רק אז מגדירים את הפתרון.',
+  },
+  {
+    icon: 'code',
+    number: '02',
+    title: 'פיתוח ואינטגרציה',
+    copy: 'בונים את הפתרון ומחברים אותו לכלים שכבר עובדים אצלכם, עם AI ואוטומציה במקומות שבהם הם חוסכים זמן.',
+  },
+  {
+    icon: 'expand',
+    number: '03',
+    title: 'השקה וצמיחה',
+    copy: 'עולים לאוויר עם מערכת יציבה ומאובטחת, שמוכנה לגדול יחד עם העסק שלכם.',
+  },
+];
 ---
 
 <section class="hero" id="home">
   <nav class="nav page-shell" aria-label="DeveLogic">
     <ul class="nav-links">
-      <li><a href="#services">פתרונות</a></li>
-      <li><a href="#engineering">איך אנחנו עובדים</a></li>
-      <li><a href="#about">אודות</a></li>
       <li><a class="nav-cta" href="#contact">צור קשר</a></li>
     </ul>
     <div class="brand-lockup">
@@ -30,67 +48,22 @@ import Icon from './Icon.astro';
           תיאום שיחת ייעוץ חינם
           <Icon name="arrow" size={19} />
         </a>
-        <a class="text-link" href="#services">ראו איך נוכל לעזור</a>
-      </div>
-      <div class="trust-row">
-        <div>
-          <strong>מערכת אישית שתפורה לעסק שלכם</strong>
-          <span>לא מוצר מדף שצריך להתאים את עצמכם אליו</span>
-        </div>
-        <div>
-          <strong>כתובת אחת לכל התהליך</strong>
-          <span>מהאפיון ועד ההשקה, בלי לתאם בין ספקים</span>
-        </div>
-        <div>
-          <strong>מוכן לצמיחה</strong>
-          <span>המערכת גדלה יחד עם הפעילות שלכם</span>
-        </div>
       </div>
     </div>
 
-    <div class="hero-visual" aria-label="תהליך העבודה איתנו">
-      <div class="blueprint-header">
-        <div>
-          <strong>תהליך העבודה איתנו</strong>
-        </div>
-        <span class="blueprint-status"><i></i> מתכנון מדויק ועד מוצר מוגמר</span>
-      </div>
-
-      <div class="solution-flow">
-        <div class="flow-step">
-          <span class="step-icon"><Icon name="strategy" size={20} /></span>
-          <div>
-            <small>שלב 01</small>
-            <strong>אפיון ואסטרטגיה</strong>
-            <p>מתחילים מהבעיה העסקית שלכם: מה מעכב, מה חשוב לכם ואיך תיראה הצלחה. רק אז מגדירים את הפתרון.</p>
-          </div>
-          <span class="step-check"><Icon name="check" size={15} /></span>
-        </div>
-
-        <div class="flow-connector"><span></span></div>
-
-        <div class="flow-step flow-step-active">
-          <span class="step-icon"><Icon name="code" size={21} /></span>
-          <div>
-            <small>שלב 02</small>
-            <strong>פיתוח ואינטגרציה</strong>
-            <p>בונים את הפתרון ומחברים אותו לכלים שכבר עובדים אצלכם, עם AI ואוטומציה במקומות שבהם הם חוסכים זמן.</p>
-          </div>
-          <span class="active-pulse"></span>
-        </div>
-
-        <div class="flow-connector"><span></span></div>
-
-        <div class="flow-step">
-          <span class="step-icon"><Icon name="expand" size={20} /></span>
-          <div>
-            <small>שלב 03</small>
-            <strong>השקה וצמיחה</strong>
-            <p>עולים לאוויר עם מערכת יציבה ומאובטחת, שמוכנה לגדול יחד עם העסק שלכם.</p>
-          </div>
-          <span class="step-check step-check-muted"><Icon name="check" size={15} /></span>
-        </div>
-      </div>
-    </div>
+    <ol class="process-row" aria-label="תהליך העבודה איתנו">
+      {
+        steps.map((step) => (
+          <li>
+            <span class="process-icon">
+              <Icon name={step.icon} size={20} />
+            </span>
+            <small>שלב {step.number}</small>
+            <strong>{step.title}</strong>
+            <p>{step.copy}</p>
+          </li>
+        ))
+      }
+    </ol>
   </div>
 </section>

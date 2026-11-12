@@ -4,6 +4,9 @@ import node from '@astrojs/node';
 // Static output: the landing page is prerendered at build time.
 // Only the contact API (`export const prerender = false`) runs on the Node server.
 export default defineConfig({
+  // Canonical domain (no www). Used for <link rel="canonical"> and /sitemap.xml.
+  site: 'https://develogic.co.il',
+  trailingSlash: 'never',
   output: 'static',
   adapter: node({ mode: 'standalone' }),
   server: { host: true },
