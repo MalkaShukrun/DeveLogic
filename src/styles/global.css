@@ -108,27 +108,27 @@ h2 { margin-bottom: 0; color: var(--ink); font-size: clamp(43px, 4.5vw, 61px); l
 
 /* Contact */
 .contact { padding: 110px 0; color: var(--ink); background: var(--paper); }
-.contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 110px; align-items: start; }
+.contact-grid { display: grid; grid-template-columns: 1fr minmax(0, 500px); gap: 90px; align-items: start; }
 .contact-copy h2 { margin-bottom: 25px; color: var(--ink); font-size: 55px; }
 .contact-copy > p:not(.kicker) { color: var(--ink-soft); line-height: 1.8; }
-.contact-form { position: relative; min-height: 590px; padding: 42px; color: var(--ink); border: 1px solid var(--line); background: #fff; box-shadow: 0 22px 60px rgba(21,52,43,.06); }
-.form-heading { margin-bottom: 30px; }
-.form-heading h3 { margin-bottom: 6px; font-size: 27px; letter-spacing: -.8px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-label { display: block; margin-bottom: 18px; color: #2f453e; font-size: 15px; font-weight: 700; }
+.contact-form { position: relative; padding: 30px; color: var(--ink); border: 1px solid var(--line); background: #fff; box-shadow: 0 22px 60px rgba(21,52,43,.06); }
+.form-heading { margin-bottom: 20px; }
+.form-heading h3 { margin-bottom: 0; font-size: 22px; letter-spacing: -.6px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+label { display: block; margin-bottom: 14px; color: #2f453e; font-size: 14px; font-weight: 700; }
 label > span { color: #9aa6a2; font-weight: 500; }
-input, textarea { width: 100%; margin-top: 8px; padding: 14px 15px; color: var(--ink); border: 1px solid #d9e1dd; border-radius: 2px; outline: none; background: #fbfcfb; font-size: 17px; text-align: right; transition: border .2s ease, box-shadow .2s ease; }
+input, textarea { width: 100%; margin-top: 6px; padding: 10px 13px; color: var(--ink); border: 1px solid #d9e1dd; border-radius: 2px; outline: none; background: #fbfcfb; font-size: 16px; text-align: right; transition: border .2s ease, box-shadow .2s ease; }
 input[type="email"], input[type="tel"] { direction: ltr; text-align: right; }
-input { height: 48px; }
+input { height: 42px; }
 textarea { resize: vertical; line-height: 1.5; }
 input::placeholder, textarea::placeholder { color: #a5afac; }
 input:focus, textarea:focus { border-color: #45a880; box-shadow: 0 0 0 3px rgba(69,168,128,.1); }
 /* Visually hidden without an offset: in RTL, a far-left offset becomes scrollable overflow */
 .hp-field { position: absolute; width: 1px; height: 1px; margin: 0; padding: 0; overflow: hidden; clip-path: inset(50%); border: 0; opacity: 0; }
 .form-error { margin: 0 0 14px; padding: 11px 14px; color: #a12a2a; border: 1px solid #f1c9c9; border-radius: 2px; background: #fdf3f3; font-size: 14px; }
-.button-submit { width: 100%; color: var(--ink); background: var(--mint); }
+.button-submit { width: 100%; min-height: 48px; font-size: 16px; color: var(--ink); background: var(--mint); }
 .button-submit:hover { background: #c8ff84; }
-.success-message { min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.success-message { min-height: 380px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .success-message > span { display: grid; width: 66px; height: 66px; margin-bottom: 25px; place-items: center; color: #137758; border-radius: 50%; background: var(--mint-soft); }
 .success-message h3 { margin-bottom: 10px; font-size: 30px; }
 .success-message p { max-width: 380px; color: #73827d; line-height: 1.7; }
